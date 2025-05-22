@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Galerie Spatiale</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background-color: #000;
+      color: #ffffff;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    .background-3d {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      background: radial-gradient(circle at bottom, #0b0c10 0%, #000000 100%);
+      overflow: hidden;
+    }
+
+    .background-3d::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: url('img0.jpeg') repeat;
+      background-size: cover;
+      animation: starDrift 150s linear infinite;
+      opacity: 0.2;
+    }
+
+    @keyframes starDrift {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(500px, 500px); }
+    }
+
+    .header-simple {
+      background: linear-gradient(90deg, #0f2027, #4c1c3f, #7e165a);
+      padding: 2rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+    }
+
+    .header-simple h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #00f7ff;
+      text-shadow: 0 0 15px #00f7ff, 0 0 40px #822f6a;
+      animation: glow 2.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00f7ff, 0 0 20px #822f6a; }
+      to { text-shadow: 0 0 20px #00f7ff, 0 0 60px #d61292; }
+    }
+
+    .header-simple nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .header-simple nav a:hover {
+      color: #00f7ff;
+      transform: scale(1.1);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      padding: 4rem;
+      animation: fadeIn 1.5s ease-in;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+      transition: transform 0.6s ease, box-shadow 0.6s ease;
+      cursor: pointer;
+    }
+
+    .gallery-grid img:hover {
+      transform: scale(1.1) rotateZ(1deg);
+      box-shadow: 0 20px 50px rgba(0, 247, 255, 0.6);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="background-3d"></div>
+
+  <header class="header-simple">
+    <h1>🌌 Galerie Spatiale</h1>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="gallery-grid">
+    <img src="img1.jpeg" alt="Galaxie 1">
+    <img src="img2.jpeg" alt="Nébuleuse 2">
+    <img src="img3.jpeg" alt="La Terre vue de l’espace">
+    <img src="img4.jpeg" alt="Saturne">
+    <img src="img5.jpeg" alt="Galaxie lointaine">
+    <img src="img6.jpeg" alt="Nébuleuse en couleur">
+    <img src="img7.jpeg" alt="La Terre depuis l’espace">
+    <img src="img8.jpeg" alt="Saturne et ses anneaux">
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: radial-gradient(ellipse at bottom, #0b0c10 0%, #000000 100%);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .stars {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      z-index: -2;
+      background: url('img-1.jpeg') repeat;
+      background-size: cover;
+      animation: starsMove 200s linear infinite;
+      opacity: 0.25;
+    }
+
+    @keyframes starsMove {
+      from { background-position: 0 0; }
+      to { background-position: 10000px 10000px; }
+    }
+
+    .floating-planet {
+      position: fixed;
+      bottom: -100px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      background: url('img-1.jpeg') no-repeat center;
+      background-size: contain;
+      z-index: -1;
+      animation: floatPlanet 20s ease-in-out infinite alternate;
+      opacity: 0.7;
+    }
+
+    @keyframes floatPlanet {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-30px) scale(1.05); }
+    }
+
+    .header-simple {
+      background: linear-gradient(90deg, #090d19 0%, #132743 30%, #3b0d36 70%, #110010 100%);
+      padding: 2rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+    }
+
+    .header-simple h1 {
+      font-size: 2.8rem;
+      margin: 0;
+      color: #00f7ff;
+      text-shadow: 0 0 10px #00f7ff, 0 0 40px #d61292;
+      animation: glowTitle 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes glowTitle {
+      0% { text-shadow: 0 0 10px #00f7ff, 0 0 20px #822f6a; }
+      100% { text-shadow: 0 0 20px #00f7ff, 0 0 60px #d61292; }
+    }
+
+    .header-simple nav a {
+      margin: 0 15px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .header-simple nav a:hover {
+      color: #00f7ff;
+      transform: scale(1.1);
+    }
+
+    .contact-form {
+      max-width: 600px;
+      margin: 4rem auto;
+      padding: 2.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0, 247, 255, 0.3);
+      animation: slideIn 1.5s ease-in;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .contact-form label {
+      display: block;
+      margin-top: 1.2rem;
+      font-weight: bold;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin-top: 0.5rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #1c1c3a;
+      color: white;
+      font-size: 1rem;
+    }
+
+    .contact-form button {
+      margin-top: 2rem;
+      padding: 0.8rem;
+      width: 100%;
+      background-color: #00f7ff;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      color: #000;
+    }
+
+    .contact-form button:hover {
+      background-color: #00c9d1;
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+  <div class="floating-planet"></div>
+
+  <header class="header-simple">
+    <h1>📡 Contact</h1>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="galerie.html">Galerie</a>
+    </nav>
+  </header>
+
+  <main class="contact-form">
+    <form id="contact-form">
+      <label for="name">Nom :</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email :</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="message">Message :</label>
+      <textarea id="message" name="message" required></textarea>
+
+      <button type="submit">Envoyer</button>
+    </form>
+  </main>
+
+  <!-- EmailJS Script -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    emailjs.init("ccV-liwiwH9uWdSwz");
+
+    document.getElementById("contact-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      emailjs.sendForm("service_i53wa6j", "template_zx8slif", this)
+        .then(function(response) {
+          alert("✅ Message envoyé avec succès !");
+        }, function(error) {
+          alert("❌ Une erreur est survenue : " + JSON.stringify(error));
+        });
+
+      this.reset();
+    });
+  </script>
+</body>
+</html>

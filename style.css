@@ -1,0 +1,96 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+  background-color: black;
+  overflow-x: hidden;
+}
+
+canvas#stars-bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.hero .content h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.hero nav a {
+  color: cyan;
+  margin: 0 1rem;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.main-section {
+  padding: 4rem;
+  background-color: #111;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 2rem;
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.4s ease;
+}
+
+.gallery-grid img:hover {
+  transform: scale(1.05);
+}
+
+.contact-form {
+  padding: 2rem;
+  max-width: 600px;
+  margin: auto;
+}
+
+.contact-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form label {
+  margin-top: 1rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 0.8rem;
+  border: none;
+  border-radius: 5px;
+  margin-top: 0.3rem;
+}
+
+.contact-form button {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #00f7ff;
+  border: none;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}

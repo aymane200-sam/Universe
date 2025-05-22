@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🚀 Cosmos Explorer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Orbitron', sans-serif;
+      color: white;
+      overflow: hidden;
+      height: 100vh;
+      background: radial-gradient(ellipse at bottom, #0a0a0f 0%, #000000 100%);
+    }
+    canvas#stars-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -2;
+    }
+    .planet {
+      position: fixed;
+      bottom: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle at 30% 30%, #8888ff, #333388);
+      border-radius: 50%;
+      z-index: -1;
+      animation: floatPlanet 20s ease-in-out infinite;
+      box-shadow: 0 0 80px #8888ff;
+    }
+    @keyframes floatPlanet {
+      0% { transform: translate(-50%, 0px); }
+      50% { transform: translate(-50%, -20px); }
+      100% { transform: translate(-50%, 0px); }
+    }
+    header.hero {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+    }
+    .hero h1 {
+      font-size: 4rem;
+      color: #00e6f6;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 20px #00e6f6, 0 0 40px #00e6f6;
+      animation: glowTitle 2s infinite alternate;
+    }
+    @keyframes glowTitle {
+      from { text-shadow: 0 0 20px #00e6f6, 0 0 40px #00e6f6; }
+      to { text-shadow: 0 0 40px #00e6f6, 0 0 80px #00e6f6; }
+    }
+    .hero p {
+      font-size: 1.4rem;
+      color: #ccc;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 10px #00e6f6;
+    }
+    nav a {
+      margin: 0 1.2rem;
+      color: #00e6f6;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #ffffff;
+    }
+    .main-section {
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .intro {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .intro h2 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: #ffffff;
+      text-shadow: 0 0 10px #00e6f6;
+    }
+    .intro p {
+      font-size: 1.3rem;
+      color: #bbb;
+      line-height: 1.7;
+    }
+    .cta {
+      text-align: center;
+    }
+    .btn {
+      display: inline-block;
+      background: #00e6f6;
+      color: #000;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: background 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 0 20px #00e6f6;
+    }
+    .btn:hover {
+      background: #00bcd4;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="stars-bg"></canvas>
+  <div class="planet"></div>
+
+  <header class="hero">
+    <div class="content">
+      <h1>🚀 Cosmos Explorer</h1>
+      <p>Explorez l'univers à travers une expérience visuelle et immersive jamais vue auparavant.</p>
+      <nav>
+        <a href="index.html">Accueil</a>
+        <a href="galerie.html">Galerie</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-section">
+    <section class="intro">
+      <h2>Bienvenue dans l'infini</h2>
+      <p>Préparez-vous à embarquer dans une odyssée cosmique. Des galaxies lointaines aux nébuleuses éclatantes, chaque page est un portail vers l’inconnu.</p>
+    </section>
+
+    <section class="cta">
+      <a href="galerie.html" class="btn">🌠 Voir la galerie</a>
+    </section>
+  </main>
+
+  <script>
+    const canvas = document.getElementById("stars-bg");
+    const ctx = canvas.getContext("2d");
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+
+    let stars = [];
+    for (let i = 0; i < 400; i++) {
+      stars.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        z: Math.random() * width
+      });
+    }
+
+    function moveStars() {
+      for (let i = 0; i < stars.length; i++) {
+        stars[i].z -= 1;
+        if (stars[i].z <= 0) {
+          stars[i].z = width;
+        }
+      }
+    }
+
+    function drawStars() {
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, width, height);
+      ctx.fillStyle = "white";
+      for (let i = 0; i < stars.length; i++) {
+        let k = 128.0 / stars[i].z;
+        let x = stars[i].x * k + width / 2;
+        let y = stars[i].y * k + height / 2;
+        if (x >= 0 && x <= width && y >= 0 && y <= height) {
+          let size = (1 - stars[i].z / width) * 2.5;
+          ctx.beginPath();
+          ctx.arc(x, y, size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+    }
+
+    function animate() {
+      moveStars();
+      drawStars();
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    window.addEventListener("resize", () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    });
+  </script>
+
+</body>
+</html>
